@@ -42,3 +42,16 @@ export function verificarSeMensagemDeCadastroExistenteFoiExibida() {
     .should('be.visible')
     .and('contain.text', 'Email Address already exist!')
 }
+
+export function adicionarAssinaturaDeNewsletter(email) {
+  cy.get('footer').scrollIntoView()
+  cy.get('footer h2').contains('Subscription').should('be.visible')
+  cy.get('#susbscribe_email').should('be.visible').type(email)
+  cy.get('#subscribe').click()
+}
+
+export function verificarSeAssinaturaDeNewsletterFoiEfetuadaComSucesso() {
+  cy.get('.alert-success')
+      .should('be.visible')
+      .and('contain.text', 'You have been successfully subscribed!')
+}

@@ -3,6 +3,8 @@ import {
   preencherCadastro,
   verificarSeCadastroFoiEfetuadoComSucesso,
   verificarSeMensagemDeCadastroExistenteFoiExibida,
+  adicionarAssinaturaDeNewsletter,
+  verificarSeAssinaturaDeNewsletterFoiEfetuadaComSucesso
 } from '../modules/cadastro/cadastro.js';
 import {
   acessarLogin,
@@ -22,7 +24,7 @@ import {
 } from '../modules/pedido/checkout.js';
 import { acessarProdutos, acessarEVerificarDetalhesDoPrimeiroProduto, pesquisarProduto, verificarResultadosDaPesquisa } from '../modules/produto/consulta.js';
 
-describe('Automation Exercise', () => {
+describe('Automation Exercise - Trabalho Final da Disciplina de Automação de Testes Web', () => {
   let usuarioDeTeste
   let contaCriada
 
@@ -142,13 +144,8 @@ describe('Automation Exercise', () => {
   it('Caso de Teste 10: Verificar assinatura na página inicial', () => {
     const email = `assinatura.${Date.now()}@example.com`
 
-    cy.get('footer').scrollIntoView()
-    cy.get('footer h2').contains('Subscription').should('be.visible')
-    cy.get('#susbscribe_email').should('be.visible').type(email)
-    cy.get('#subscribe').click()
-    cy.get('.alert-success')
-      .should('be.visible')
-      .and('contain.text', 'You have been successfully subscribed!')
+    adicionarAssinaturaDeNewsletter(email)
+    verificarSeAssinaturaDeNewsletterFoiEfetuadaComSucesso()
   })
 
   it('Caso de Teste 15: Fazer pedido registrando o usuário antes do checkout', () => {
@@ -157,7 +154,7 @@ describe('Automation Exercise', () => {
 
     adicionarPrimeiroProdutoAoCarrinho()
     prosseguirParaCheckout()
-    preencherPagamentoEConfirmarPedido(usuarioDeTeste.name, 'This is a test order.', '4111111111111111', '123', '05', '2025')
+    preencherPagamentoEConfirmarPedido(usuarioDeTeste.name, 'This is a test order.', '4111111111111111', '123', '05', '2030')
     verificarSePedidoFoiConfirmado()
   })
 
@@ -170,7 +167,7 @@ describe('Automation Exercise', () => {
 
     adicionarPrimeiroProdutoAoCarrinho()
     prosseguirParaCheckout()
-    preencherPagamentoEConfirmarPedido(usuarioDeTeste.name, 'This is a test order.', '4111111111111111', '123', '05', '2025')
+    preencherPagamentoEConfirmarPedido(usuarioDeTeste.name, 'This is a test order.', '4111111111111111', '123', '05', '2030')
     verificarSePedidoFoiConfirmado()
   })
 })
