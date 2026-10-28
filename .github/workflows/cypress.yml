@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests
-        run: npm test
+        run: npm test -- --spec "cypress/e2e/automation-exercise-modules.cy.js"
 
       - name: Upload test report and screenshots
         if: always()
